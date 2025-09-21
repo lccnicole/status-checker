@@ -36,3 +36,7 @@ USER appuser
 ENTRYPOINT ["status-checker"]
 CMD ["--format", "table"]
 
+# --- to run as service instead, override CMD at runtime:
+# docker run --rm -p 8080:8080 status-checker \
+#   python -m uvicorn status_checker.serve:app --host 0.0.0.0 --port 8080
+ENTRYPOINT ["python", "-m", "uvicorn", "status_checker.serve:app", "--host", "0.0.0.0", "--port", "8080"]
