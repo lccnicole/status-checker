@@ -28,7 +28,7 @@ Supports exit codes so you can use it in CI/CD pipelines.
 Clone and install locally:
 
 ```bash
-git clone https://github.com/yourname/status-checker.git
+git clone https://github.com/lccnicole/status-checker.git
 cd status-checker
 python -m venv .venv
 . .venv/bin/activate   # (or .venv\Scripts\activate on Windows)
