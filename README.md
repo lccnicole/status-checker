@@ -133,3 +133,18 @@ docker run --rm status-checker --format table
 - **Scope limited to official public pages**  
   No authentication or private project health checks are included.
 
+## CI/CD
+
+- **CI**: GitHub Actions runs tests on every push/PR (`.github/workflows/ci.yml`).
+- **CD**: On `main` or a Release, GitHub Actions builds and pushes a Docker image to
+  **GitHub Container Registry (GHCR)** (`.github/workflows/publish-image.yml`).
+
+### Pull & Run the image
+
+```bash
+# CLI mode
+docker run --rm ghcr.io/lccnicole/status-checker:latest --format table
+
+# HTTP service mode (override command)
+docker run --rm -p 8080:8080 ghcr.io/lccnicole/status-checker:latest \
+  python -m uvicorn status_checker.serve:app --host 0.0.0.0 --port 8080

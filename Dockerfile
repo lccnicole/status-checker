@@ -1,7 +1,7 @@
 # ---- build stage: make a wheel ---------------------------------------------
 FROM python:3.12-slim AS build
 
-# System deps (optional: remove if you don't need gcc for any deps)
+# System deps (optional: remove if don't need gcc for any deps)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential ca-certificates curl && \
     rm -rf /var/lib/apt/lists/*
@@ -9,8 +9,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Copy only files needed to resolve/install deps first (for better caching)
 WORKDIR /app
 COPY pyproject.toml ./
-# If you have a README.md / LICENSE referenced by pyproject, include them too
-COPY README.md LICENSE* . 2>/dev/null || true
+COPY README.md ./
+# COPY LICENSE* ./   # uncomment if add a LICENSE file later
 
 # Install build backend & build wheel
 RUN python -m pip install --upgrade pip build && \
